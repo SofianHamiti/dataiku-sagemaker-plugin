@@ -119,7 +119,7 @@
       "label": "vpc subnet",
       "type": "STRING",
       "defaultValue": "",
-      "mandatory": true
+      "mandatory": false
     },
     {
       "name": "s3_inputs",
