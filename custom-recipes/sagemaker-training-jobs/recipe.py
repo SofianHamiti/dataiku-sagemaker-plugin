@@ -37,17 +37,17 @@ s3_output = str(get_recipe_config()['s3_output'])
 container = get_image_uri(region, algorithm, 'latest')
 
 estimator = Estimator(image_name=container,
-                                base_job_name=f'dku',
-                                role=SAGEMAKER_ROLE,
-                                train_instance_count=instance_count,
-                                train_instance_type=instance_type,
-                                subnets=subnet,
-                                security_group_ids=security_group_id,
-                                metric_definitions=metric_definitions,
-                                train_volume_size=30,
-                                input_mode='File',
-                                hyperparameters=hyperparameters,
-                                output_path=s3_output)
+                      base_job_name=f'dku',
+                      role=SAGEMAKER_ROLE,
+                      train_instance_count=instance_count,
+                      train_instance_type=instance_type,
+                      subnets=subnet,
+                      security_group_ids=security_group_id,
+                      metric_definitions=metric_definitions,
+                      train_volume_size=30,
+                      input_mode='File',
+                      hyperparameters=hyperparameters,
+                      output_path=s3_output)
 estimator.fit(inputs=s3_inputs, logs=True)
 
 # ==============================================================================
