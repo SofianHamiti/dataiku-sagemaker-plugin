@@ -1,0 +1,7 @@
+{
+  "acceptedPythonInterpreters": ["PYTHON36"],
+  "description": "install boto3 and SageMaker libraries",
+  "forceConda": false,
+  "installCorePackages": true,
+  "installJupyterSupport": false
+}

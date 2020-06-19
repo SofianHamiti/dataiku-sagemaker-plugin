@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "label": "Processing Job",
+    "description": "Launch an Amazon SageMaker Processing job",
+    "icon": "icon-cloud"
+  },
+  "kind": "PYTHON",
+  "inputRoles": [
+    {
+      "name": "input",
+      "label": "Input dataset",
+      "description": "The dataset containing the raw data from which we'll compute correlations.",
+      "arity": "UNARY",
+      "required": false,
+      "acceptsDataset": true
+    }
+  ],
+  "outputRoles": [
+    {
+      "name": "output",
+      "label": "Output dataset",
+      "description": "The dataset containing the correlations.",
+      "arity": "UNARY",
+      "required": false,
+      "acceptsDataset": true
+    }
+  ],
+  "params": [
+    {
+      "name": "container",
+      "label": "container",
+      "type": "STRING",
+      "defaultValue": "520691797693.dkr.ecr.eu-west-1.amazonaws.com/data-processing-containers:latest",
+      "mandatory": true
+    },
+    {
+      "name": "instance_type",
+      "label": "instance type",
+      "type": "SELECT",
+      "selectChoices": [
+        {
+          "value": "ml.m5.xlarge",
+          "label": "General Purpose"
+        },
+        {
+          "value": "ml.c5.2xlarge",
+          "label": "Compute Optimized"
+        }
+      ],
+      "mandatory": true
+    },
+    {
+      "name": "instance_count",
+      "label": "instance count",
+      "type": "INT",
+      "defaultValue": 1,
+      "mandatory": true
+    },
+    {
+      "name": "input_folder",
+      "label": "input folder",
+      "type": "STRING",
+      "defaultValue": "/opt/ml/processing/input",
+      "mandatory": true
+    },
+    {
+      "name": "output_folder",
+      "label": "output folder",
+      "type": "STRING",
+      "defaultValue": "/opt/ml/processing/output",
+      "mandatory": true
+    },
+    {
+      "name": "s3_input",
+      "label": "s3 input path",
+      "type": "STRING",
+      "defaultValue": "s3://sagemaker-eu-west-1-520691797693/sagemaker/dataiku/input/reviews.csv",
+      "description": "",
+      "mandatory": true
+    },
+    {
+      "name": "s3_output",
+      "label": "s3 output path",
+      "type": "STRING",
+      "defaultValue": "s3://sagemaker-eu-west-1-520691797693/sagemaker/dataiku/processed",
+      "mandatory": true
+    }
+  ],
+  "resourceKeys": []
+}

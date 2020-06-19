@@ -1,2 +1,2 @@
 # dataiku-sagemaker-plugin
-Dataiku plugin for Amazon SageMaker
+plugin to integrate SageMaker with Dataiku

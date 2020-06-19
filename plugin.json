@@ -1,0 +1,14 @@
+{
+    "id": "amazon-sagemaker",
+    "version": "0.1",
+    "meta": {
+        "label": "Amazon SageMaker",
+        "description": "plugin to integrate SageMaker with Dataiku",
+        "author": "Sofian Hamiti",
+        "icon": "icon-cloud",
+        "tags": ["Machine Learning", "Amazon", "AWS", "Cloud"],
+        // URL where the user can learn more about the plugin
+        "url": "",
+        "licenseInfo": "Apache Software License"
+    }
+}

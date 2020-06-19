@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "label": "Training Job",
+    "description": "Launch an Amazon SageMaker Training job",
+    "icon": "icon-cloud"
+  },
+  "kind": "PYTHON",
+  "inputRoles": [
+    {
+      "name": "input",
+      "label": "Input dataset",
+      "description": "The dataset containing the raw data from which we'll compute correlations.",
+      "arity": "UNARY",
+      "required": false,
+      "acceptsDataset": true
+    }
+  ],
+  "outputRoles": [
+    {
+      "name": "output",
+      "label": "Output dataset",
+      "description": "The dataset containing the correlations.",
+      "arity": "UNARY",
+      "required": false,
+      "acceptsDataset": true
+    }
+  ],
+  "params": [
+    {
+      "name": "model_type",
+      "label": "built-in model or custom",
+      "type": "SELECT",
+      "selectChoices": [
+        {
+          "value": "built-in",
+          "label": "built-in"
+        },
+        {
+          "value": "custom",
+          "label": "custom"
+        }
+      ],
+      "mandatory": true
+    },
+    {
+      "name": "algorithm",
+      "label": "built-in algorithm",
+      "type": "SELECT",
+      "selectChoices": [
+        {
+          "value": "blazingtext",
+          "label": "BlazingText"
+        },
+        {
+          "value": "xgboost",
+          "label": "XGBoost"
+        },
+        {
+          "value": "forecasting-deepar",
+          "label": "DeepAR"
+        },
+        {
+          "value": "lda",
+          "label": "LDA"
+        },
+        {
+          "value": "knn",
+          "label": "KNN"
+        },
+        {
+          "value": "seq2seq",
+          "label": "Seq2Seq"
+        }
+      ],
+      "visibilityCondition": "model.model_type == 'built-in'"
+    },
+    {
+      "name": "algorithm",
+      "label": "container image uri",
+      "type": "STRING",
+      "visibilityCondition": "model.model_type == 'custom'"
+    },
+    {
+      "name": "hyperparameters",
+      "label": "hyperparameters",
+      "type": "STRING",
+      "defaultValue": "{\"buckets\": \"3003119\", \"epochs\": \"5\", \"learning_rate\": \"0.00901302564637139\", \"min_count\": \"0\", \"mode\": \"supervised\", \"patience\": \"10\",\"vector_dim\": \"33\", \"word_ngrams\": \"1\"}",
+      "mandatory": true
+    },
+    {
+      "name": "instance_type",
+      "label": "instance type",
+      "type": "SELECT",
+      "selectChoices": [
+        {
+          "value": "ml.m5.xlarge",
+          "label": "General Purpose"
+        },
+        {
+          "value": "ml.c5.2xlarge",
+          "label": "Compute Optimized"
+        },
+        {
+          "value": "ml.p3.xlarge",
+          "label": "GPU enabled"
+        }
+      ],
+      "mandatory": true
+    },
+    {
+      "name": "instance_count",
+      "label": "instance count",
+      "type": "INT",
+      "defaultValue": 1,
+      "mandatory": true
+    },
+    {
+      "name": "subnet",
+      "label": "vpc subnet",
+      "type": "STRING",
+      "defaultValue": "",
+      "mandatory": true
+    },
+    {
+      "name": "s3_inputs",
+      "label": "s3 input paths",
+      "type": "STRING",
+      "defaultValue": "{\"train\": \"s3://sagemaker-knowledge-transfer/blazingtext/data/train/data.train\", \"validation\": \"s3://sagemaker-knowledge-transfer/blazingtext/data/validation/data.valid\"}",
+      "mandatory": true
+    },
+    {
+      "name": "s3_output",
+      "label": "model s3 path",
+      "type": "STRING",
+      "defaultValue": "s3://sagemaker-eu-west-1-520691797693/sagemaker/dataiku",
+      "mandatory": true
+    }
+  ],
+  "resourceKeys": []
+}
