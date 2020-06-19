@@ -50,7 +50,7 @@ data_processor.run(
     ],
     outputs=[
         ProcessingOutput(
-            output_name='preprocessed',
+            output_name='processed',
             source=output_folder,
             destination=s3_output
         )

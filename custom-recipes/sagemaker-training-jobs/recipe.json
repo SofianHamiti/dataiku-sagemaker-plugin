@@ -84,7 +84,7 @@
       "name": "hyperparameters",
       "label": "hyperparameters",
       "type": "STRING",
-      "defaultValue": "{\"buckets\": \"3003119\", \"epochs\": \"5\", \"learning_rate\": \"0.00901302564637139\", \"min_count\": \"0\", \"mode\": \"supervised\", \"patience\": \"10\",\"vector_dim\": \"33\", \"word_ngrams\": \"1\"}",
+      "defaultValue": "",
       "mandatory": true
     },
     {
@@ -125,14 +125,14 @@
       "name": "s3_inputs",
       "label": "s3 input paths",
       "type": "STRING",
-      "defaultValue": "{\"train\": \"s3://sagemaker-knowledge-transfer/blazingtext/data/train/data.train\", \"validation\": \"s3://sagemaker-knowledge-transfer/blazingtext/data/validation/data.valid\"}",
+      "defaultValue": "",
       "mandatory": true
     },
     {
       "name": "s3_output",
       "label": "model s3 path",
       "type": "STRING",
-      "defaultValue": "s3://sagemaker-eu-west-1-520691797693/sagemaker/dataiku",
+      "defaultValue": "",
       "mandatory": true
     }
   ],
