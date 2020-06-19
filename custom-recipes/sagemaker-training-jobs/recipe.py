@@ -2,6 +2,7 @@
 import json
 import dataiku
 from dataiku.customrecipe import get_recipe_config, get_input_names_for_role, get_output_names_for_role
+from pandas.io.json import json_normalize
 from sagemaker.estimator import Estimator
 from sagemaker.amazon.amazon_estimator import get_image_uri
 from session_utils import get_instance_role, get_sagemaker_client, get_region
@@ -15,7 +16,8 @@ region = get_region()
 # ==============================================================================
 input_names = get_input_names_for_role('input')
 input_datasets = [dataiku.Dataset(name) for name in input_names]
-
+output_names = get_output_names_for_role('output')
+output_datasets = [dataiku.Dataset(name) for name in output_names]
 # ==============================================================================
 # TRAINING JOB PARAMETERS
 # ==============================================================================
@@ -34,7 +36,7 @@ s3_output = str(get_recipe_config()['s3_output'])
 # ==============================================================================
 container = get_image_uri(region, algorithm, 'latest')
 
-sagemaker_estimator = Estimator(image_name=container,
+estimator = Estimator(image_name=container,
                                 base_job_name=f'dku',
                                 role=SAGEMAKER_ROLE,
                                 train_instance_count=instance_count,
@@ -46,12 +48,13 @@ sagemaker_estimator = Estimator(image_name=container,
                                 input_mode='File',
                                 hyperparameters=hyperparameters,
                                 output_path=s3_output)
-sagemaker_estimator.fit(inputs=s3_inputs, logs=True)
+estimator.fit(inputs=s3_inputs, logs=True)
 
 # ==============================================================================
 # OUTPUT
 # ==============================================================================
-output_names = get_output_names_for_role('output')
-output_datasets = [dataiku.Dataset(name) for name in output_names]
-# output_dataset =  output_datasets[0]
-# output_dataset.write_with_schema(output)
+job_description = estimator.latest_training_job.describe()
+output = json_normalize(job_description)
+
+output_dataset = output_datasets[0]
+output_dataset.write_with_schema(output)
